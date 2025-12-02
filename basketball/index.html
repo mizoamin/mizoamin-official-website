@@ -1,64 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="../style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mizo Amin | The Game Evolved</title>
+    <style>
+        body, html { margin: 0; padding: 0; background-color: #000; font-family: 'Arial', sans-serif; }
+        
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+
+        #heroVideo {
+            position: absolute;
+            top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            opacity: 0.6; /* Darkens video slightly so text pops */
+        }
+
+        .content-overlay {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .content-overlay h1 {
+            font-size: 3.5rem; /* Large Cinematic Text */
+            margin: 0;
+            font-weight: 800;
+            /* The Orange Neon Glow */
+            text-shadow: 0 0 20px #FF8C00, 0 0 40px #FF8C00;
+        }
+
+        .content-overlay p {
+            font-size: 1.2rem;
+            color: #ddd;
+            margin-top: 15px;
+            font-weight: lighter;
+        }
+    </style>
 </head>
-<head>
-<style>
-<style>
-  body, html { margin: 0; padding: 0; background-color: #000; font-family: 'Arial', sans-serif; }
-  
-  .hero-section {
-      position: relative;
-      height: 100vh;
-      width: 100%;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
+<body>
 
-  #heroVideo {
-      position: absolute;
-      top: 50%; left: 50%;
-      min-width: 100%; min-height: 100%;
-      width: auto; height: auto;
-      z-index: 1;
-      transform: translate(-50%, -50%);
-      opacity: 0.7; /* Slightly darker so text pops */
-  }
+    <section class="hero-section">
+        <video autoplay muted loop playsinline id="heroVideo">
+            <source src="https://mizoamin.github.io/mizoamin-official-website/assets/videos/basketball-hero.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
 
-  .content-overlay {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 3px; /* Adds that "Cinematic" spacing */
-  }
+        <div class="content-overlay">
+            <h1>THE GAME EVOLVED</h1>
+            <p>Mizo Amin: Professional Basketball & Tech</p>
+        </div>
+    </section>
 
-  .content-overlay h1 {
-      font-size: 4rem; /* Much bigger */
-      margin: 0;
-      font-weight: 800;
-      /* Stronger Orange Neon Glow */
-      text-shadow: 0 0 10px #FF8C00, 0 0 20px #FF8C00, 0 0 40px #FF8C00;
-  }
-
-  .content-overlay p {
-      font-size: 1.2rem;
-      color: #ddd;
-      margin-top: 10px;
-      font-weight: lighter;
-  }
-</style>
-</head>
-<section class="hero-section">
-    <video autoplay muted loop playsinline id="heroVideo">
-        <source src="../assets/videos/basketball-hero.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-    </video>
-
-    <div class="content-overlay">
-        <h1>THE GAME EVOLVED</h1>
-        <p>Mizo Amin: Professional Basketball & Tech</p>
-    </div>
-</section>
+</body>
+</html>
