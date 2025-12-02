@@ -5,118 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mizo Amin | The Game Evolved</title>
     <style>
-        /* --- GLOBAL STYLES --- */
-        body, html { 
-            margin: 0; 
-            padding: 0; 
-            background-color: #000; /* Black Background */
-            font-family: 'Arial', sans-serif; 
-            color: white; 
-            overflow-x: hidden;
+        /* --- GLOBAL RESET & DARK THEME --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #050505; /* Deep Black */
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
         }
 
-        /* --- SECTION 1: CINEMATIC VIDEO HERO --- */
-        .hero-section {
-            position: relative;
-            height: 100vh; /* Full Screen Height */
-            width: 100%;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-bottom: 2px solid #FF8C00;
-        }
-
-        #heroVideo {
-            position: absolute;
-            top: 50%; left: 50%;
-            min-width: 100%; min-height: 100%;
-            width: auto; height: auto;
-            z-index: 1;
-            transform: translate(-50%, -50%);
-            opacity: 0.6;
-        }
-
-        .hero-overlay {
-            position: relative;
-            z-index: 2;
+        /* --- 1. HERO / TITLE SECTION --- */
+        .hero-header {
             text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+            padding: 80px 20px 40px;
+            background: linear-gradient(to bottom, #000, #111);
         }
 
-        .hero-overlay h1 {
+        .hero-header h1 {
             font-size: 4rem;
             margin: 0;
-            font-weight: 800;
-            text-shadow: 0 0 20px #FF8C00, 0 0 40px #FF8C00; /* Neon Orange Glow */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
         }
 
-        .hero-overlay p {
+        .hero-header span {
+            color: #FF8C00; /* Signature Orange */
+        }
+
+        .hero-header p {
             font-size: 1.2rem;
-            color: #ddd;
+            color: #888;
             margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
         }
 
-        /* --- SECTION 2: PROFILE (The "Old" Top Section) --- */
-        .profile-section {
+        /* --- 2. PROFILE IMAGE & STORY SECTION --- */
+        .profile-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 80px 20px;
             max-width: 1100px;
             margin: 0 auto;
-            gap: 50px;
+            padding: 40px 20px;
+            gap: 60px; /* Space between text and picture */
         }
 
-        .profile-text {
+        /* The Picture Placeholder */
+        .profile-image-placeholder {
             flex: 1;
-        }
-
-        .profile-text h2 {
-            font-size: 3rem;
-            color: #FF8C00;
-            margin-bottom: 20px;
+            height: 500px;
+            background-color: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-weight: bold;
             text-transform: uppercase;
         }
 
-        .profile-text p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #ccc;
-        }
-
-        /* IMAGE PLACEHOLDER: Put your photo here later */
-        .profile-image-box {
+        .profile-content {
             flex: 1;
-            height: 400px;
-            background-color: #111;
-            border: 2px dashed #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            color: #555;
-            font-weight: bold;
-        }
-        
-        .profile-image-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-            display: none; /* Remove this line when you add a real image */
         }
 
-        /* --- SECTION 3: THE THREE PILLARS (Athlete, Visionary, Tech) --- */
-        .pillars-container {
+        .profile-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #FF8C00;
+        }
+
+        .profile-content p {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        /* --- 3. THE "THREE BOXES" (Athlete, Visionary, Tech) --- */
+        .pillars-section {
             background-color: #0a0a0a;
             padding: 80px 20px;
+            border-top: 1px solid #222;
         }
 
         .pillars-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr); /* 3 Columns */
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
@@ -124,96 +101,93 @@
 
         .pillar-card {
             background: #111;
-            padding: 40px 20px;
-            border-radius: 15px;
+            padding: 50px 30px;
+            border-radius: 5px;
             text-align: center;
             border: 1px solid #222;
-            transition: transform 0.3s, border-color 0.3s;
+            transition: 0.3s ease;
         }
 
         .pillar-card:hover {
-            transform: translateY(-10px);
-            border-color: #FF8C00;
+            border-color: #FF8C00; /* Glows orange on hover */
+            transform: translateY(-5px);
         }
 
         .pillar-card h3 {
             font-size: 1.8rem;
-            color: white;
             margin-bottom: 15px;
             text-transform: uppercase;
         }
 
-        .pillar-card span {
-            display: block;
-            height: 2px;
-            width: 50px;
-            background: #FF8C00;
-            margin: 0 auto 20px auto;
+        .pillar-card .line {
+            width: 40px;
+            height: 3px;
+            background-color: #FF8C00;
+            margin: 0 auto 20px;
         }
 
         .pillar-card p {
             color: #aaa;
-            line-height: 1.6;
+            font-size: 1rem;
         }
 
         /* --- MOBILE RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .hero-overlay h1 { font-size: 2.5rem; }
-            .profile-section { flex-direction: column-reverse; text-align: center; }
-            .pillars-grid { grid-template-columns: 1fr; }
-            .profile-image-box { width: 100%; height: 300px; }
+        @media (max-width: 900px) {
+            .profile-container { flex-direction: column-reverse; text-align: center; }
+            .pillars-grid { grid-template-columns: 1fr; } /* Stack boxes on phone */
+            .hero-header h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <section class="hero-section">
-        <video autoplay muted loop playsinline id="heroVideo">
-            <source src="https://mizoamin.github.io/mizoamin-official-website/assets/videos/basketball-hero.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay">
-            <h1>THE GAME EVOLVED</h1>
-            <p>Mizo Amin: Professional Basketball & Tech</p>
-        </div>
-    </section>
+    <header class="hero-header">
+        <h1>Mizo <span>Amin</span></h1>
+        <p>The Game Evolved</p>
+    </header>
 
-    <section class="profile-section">
-        <div class="profile-text">
-            <h2>Mizo Amin</h2>
+    <section class="profile-container">
+        <div class="profile-content">
+            <h2>The Story</h2>
             <p>
-                Professional Basketball Player. Team Captain. Businessman.
-                I have dedicated my life to mastering the game on the court while exploring the frontiers of technology off the court. 
-                From Al Shamal Sports Club to international FIBA recognition, my journey is about constant evolution.
+                I am a Professional Basketball Player, Team Captain, and Entrepreneur.
+                From leading Al Shamal Sports Club to ranking as a top shooter in Asia (FIBA), 
+                my career is built on discipline, precision, and leadership.
+            </p>
+            <p>
+                But the game doesn't stop at the buzzer. I am passionate about bridging the gap 
+                between sports and technology, building a legacy that evolves with the future.
             </p>
         </div>
-        <div class="profile-image-box">
-            [ PICTURE PLACEHOLDER ]
+        
+        <div class="profile-image-placeholder">
+            [ Place Your Picture Here ]
         </div>
     </section>
 
-    <div class="pillars-container">
+    <section class="pillars-section">
         <div class="pillars-grid">
             
             <div class="pillar-card">
                 <h3>The Athlete</h3>
-                <span></span>
-                <p>Team Captain of Al Shamal SC. Top 7 Shooter in Asia (FIBA). Leading with discipline, power, and precision.</p>
+                <div class="line"></div>
+                <p>Team Captain. 6'3" Guard. FIBA Asia Top Shooter. Relentless drive and physical mastery.</p>
             </div>
 
             <div class="pillar-card">
                 <h3>The Visionary</h3>
-                <span></span>
-                <p>Building businesses and brands. Transforming sports leadership into entrepreneurial success.</p>
+                <div class="line"></div>
+                <p>Entrepreneur. Business Graduate. Building brands and opportunities beyond the court.</p>
             </div>
 
             <div class="pillar-card">
                 <h3>The Tech</h3>
-                <span></span>
-                <p>Passionate about IT and digital innovation. Merging the physical world of sports with the digital future.</p>
+                <div class="line"></div>
+                <p>IT Expert. Digital Innovation. Merging modern technology with professional sports performance.</p>
             </div>
 
         </div>
-    </div>
+    </section>
 
 </body>
 </html>
