@@ -1,0 +1,43 @@
+/* Removes default browser margins */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.hero-section {
+    position: relative;
+    height: 100vh; /* Full screen height */
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000; /* Fallback for slow loads */
+}
+
+#heroVideo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 1;
+    transform: translate(-50%, -50%); /* Centers the video perfectly */
+    opacity: 0.8; /* Slight dim so text pops */
+}
+
+.content-overlay {
+    position: relative;
+    z-index: 2; /* Sits on top of video */
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.content-overlay h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0;
+    text-shadow: 0 0 20px #FF8C00; /* Matches the video's neon orange */
+}
