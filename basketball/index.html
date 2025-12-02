@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mizo Amin | The Game Evolved</title>
     <style>
-        body, html { margin: 0; padding: 0; background-color: #000; font-family: 'Arial', sans-serif; }
+        /* --- CORE STYLES --- */
+        body, html { margin: 0; padding: 0; background-color: #000; font-family: 'Arial', sans-serif; color: white; }
         
+        /* --- HERO SECTION (Video) --- */
         .hero-section {
             position: relative;
-            height: 100vh;
+            height: 100vh; /* Full Screen */
             width: 100%;
             overflow: hidden;
             display: flex;
@@ -25,14 +27,13 @@
             width: auto; height: auto;
             z-index: 1;
             transform: translate(-50%, -50%);
-            opacity: 0.6;
+            opacity: 0.5; /* Darken video so text is readable */
         }
 
         .content-overlay {
             position: relative;
             z-index: 2;
             text-align: center;
-            color: #fff;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
@@ -41,7 +42,7 @@
             font-size: 3.5rem;
             margin: 0;
             font-weight: 800;
-            text-shadow: 0 0 20px #FF8C00, 0 0 40px #FF8C00;
+            text-shadow: 0 0 20px #FF8C00, 0 0 40px #FF8C00; /* Orange Glow */
         }
 
         .content-overlay p {
@@ -49,6 +50,70 @@
             color: #ddd;
             margin-top: 15px;
             font-weight: lighter;
+        }
+
+        /* --- STORY & CONTENT SECTION --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .about-section {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: #FF8C00; /* Orange */
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        /* --- STATS GRID --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+            background: #111;
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+
+        .stat-box h3 {
+            font-size: 3rem;
+            color: #fff;
+            margin: 0;
+        }
+
+        .stat-box span {
+            color: #FF8C00;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        /* --- MOBILE TWEAKS --- */
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .about-section { flex-direction: column; }
+            .stats-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -64,6 +129,39 @@
             <p>Mizo Amin: Professional Basketball & Tech</p>
         </div>
     </section>
+
+    <div class="container">
+        <div class="about-section">
+            <div class="about-text">
+                <h2>The Journey</h2>
+                <p>
+                    I am Mizo Amin, a Professional Basketball Player and Team Captain of Al Shamal Sports Club. 
+                    Standing at 6'3" and 110kg, I have dedicated my life to mastering the game on the court 
+                    while building businesses off the court.
+                </p>
+                <p>
+                    From leading Al Rayyan Sports Club for years to becoming a Top 7 Shooter in Asia (FIBA), 
+                    my career is defined by discipline, leadership, and a constant drive to evolve. 
+                    Now, I combine my passion for sports with technology and entrepreneurship.
+                </p>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <h3>6'3"</h3>
+                <span>Height</span>
+            </div>
+            <div class="stat-box">
+                <h3>#1</h3>
+                <span>Team Captain</span>
+            </div>
+            <div class="stat-box">
+                <h3>FIBA</h3>
+                <span>Top Shooter</span>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
