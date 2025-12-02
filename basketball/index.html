@@ -1,3 +1,50 @@
+<head>
+<style>
+  /* Paste the CSS Code here */
+  body, html {
+      margin: 0;
+      padding: 0;
+  }
+
+  .hero-section {
+      position: relative;
+      height: 100vh; /* Full screen height */
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+  }
+
+  #heroVideo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+      opacity: 0.8;
+  }
+
+  .content-overlay {
+      position: relative;
+      z-index: 2;
+      color: white;
+      text-align: center;
+      font-family: Arial, sans-serif;
+  }
+
+  .content-overlay h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0;
+      text-shadow: 0 0 20px #FF8C00;
+  }
+</style>
+</head>
 <section class="hero-section">
     <video autoplay muted loop playsinline id="heroVideo">
         <source src="assets/videos/basketball-hero.mp4" type="video/mp4">
