@@ -1,1 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Mizo Amin - Qatar Basketball Captain</title>
+    <meta name="description" content="Official photo gallery of Mizo Amin, Professional Athlete and Al Shamal SC Captain. Explore moments of leadership and excellence.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --black: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* رأس الصفحة */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #000, var(--dark-gray));
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            color: var(--gold);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #888;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* شبكة الصور (Masonry Layout) */
+        .gallery-container {
+            column-count: 3; /* 3 أعمدة للشاشات الكبيرة */
+            column-gap: 20px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) { .gallery-container { column-count: 2; } }
+        @media (max-width: 768px) { .gallery-container { column-count: 1; } }
+
+        /* كارت الصورة */
+        .gallery-item {
+            background: var(--dark-gray);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            break-inside: avoid; /* يمنع قص الصورة بين الأعمدة */
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: brightness(0.9);
+            transition: filter 0.3s;
+        }
+
+        .gallery-item:hover img {
+            filter: brightness(1.1);
+        }
+
+        /* معلومات الصورة (تظهر عند التحويم أو دائماً حسب الرغبة) */
+        .info-overlay {
+            padding: 15px;
+            background: var(--dark-gray);
+            border-top: 2px solid var(--gold);
+        }
+
+        .photo-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            color: var(--white);
+            margin: 0 0 5px 0;
+        }
+
+        .photo-tags {
+            font-size: 0.8rem;
+            color: var(--gold);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tag {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* حالة التحميل */
+        #loader {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Mizo Amin Legacy</h1>
+        <div class="subtitle">Professional Athlete & Entrepreneur Gallery</div>
+    </header>
+
+    <div id="loader">Loading Archive...</div>
+    <div class="gallery-container" id="galleryGrid"></div>
+
+    <script>
+        // إعدادات المسارات (مهم جداً)
+        const JSON_PATH = 'assets/data/mizo_gallery_data.json';
+        const IMAGES_BASE_PATH = 'assets/images/gallery/';
+
+        async function loadGallery() {
+            try {
+                const response = await fetch(JSON_PATH);
+                if (!response.ok) throw new Error("Could not fetch data file");
+                
+                const data = await response.json();
+                const grid = document.getElementById('galleryGrid');
+                document.getElementById('loader').style.display = 'none';
+
+                data.forEach(photo => {
+                    // بناء كارت الصورة
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item';
+
+                    // تصحيح المسار (إذا كان السكريبت حفظ المسار النسبي نستخدمه، وإلا نبنيه)
+                    // ملاحظة: السكريبت V17 يحفظ 'filepath' كاملاً
+                    const imgSrc = IMAGES_BASE_PATH + (photo.filepath || photo.filename);
+
+                    // استخراج أهم التاجات (أول 3 فقط للشكل الجمالي)
+                    const tagsHTML = photo.tags.slice(0, 3)
+                        .map(tag => `<span class="tag">#${tag}</span>`)
+                        .join('');
+
+                    item.innerHTML = `
+                        <img src="${imgSrc}" 
+                             alt="${photo.alt_text}" 
+                             title="${photo.title}"
+                             loading="lazy">
+                        <div class="info-overlay">
+                            <h3 class="photo-title">${photo.title || 'Mizo Amin Moment'}</h3>
+                            <div class="photo-tags">${tagsHTML}</div>
+                        </div>
+                    `;
+                    grid.appendChild(item);
+                });
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('loader').innerHTML = 
+                    `<p style="color:red">Error loading gallery. Check console.</p>`;
+            }
+        }
+
+        // تشغيل الدالة
+        loadGallery();
+    </script>
+
+</body>
+</html>
