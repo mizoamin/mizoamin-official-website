@@ -261,9 +261,8 @@
         // Path to JSON data file
         const JSON_URL = 'assets/data/mizo_gallery_data.json';
         
-        // Base folder for images on GitHub Pages
-        // Important: Ensure this path matches exactly where you uploaded folder 'gallery'
-        const BASE_IMG_PATH = 'assets/images/gallery/';
+        // Base URL for the NEW Archive Repo (Where images actually live)
+        const BASE_IMG_PATH = 'https://mizoamin.github.io/mizoamin-media-archive/';
 
         let allImagesData = [];
 
@@ -361,14 +360,21 @@
 
             // Render Items
             filteredData.forEach(img => {
-                // Construct Path
-                // Priority: filepath (from script) > filename
+                // --- Smart Path Logic ---
                 let imgSrc = img.filepath || img.filename;
+                
+                // Fallback: If no folder in path, but album is specific, guess the folder
+                // Example: JSON has "filename: img.jpg" but album is "Twins", we try "twins/img.jpg"
+                if ((!imgSrc.includes('/')) && img._cleanAlbum !== 'General') {
+                    // Convert album name back to folder-like name (lowercase, spaces to underscores)
+                    const probableFolder = img._cleanAlbum.toLowerCase().replace(/ /g, '_');
+                    imgSrc = `${probableFolder}/${imgSrc}`;
+                }
                 
                 // Ensure no double slashes
                 if (imgSrc.startsWith('/')) imgSrc = imgSrc.substring(1);
                 
-                // Full URL
+                // Full URL using Archive Repo
                 const fullPath = BASE_IMG_PATH + imgSrc;
                 
                 // Encode spaces to avoid broken links
