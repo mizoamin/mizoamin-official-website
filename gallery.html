@@ -4,199 +4,417 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery | Mizo Amin Legacy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <meta name="description" content="Official Archive of Captain Mizo Amin - Qatar Basketball Team Captain.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        :root { --gold: #D4AF37; --black: #0a0a0a; --dark: #1a1a1a; --text: #f0f0f0; }
-        body { background-color: var(--black); color: var(--text); font-family: 'Roboto', sans-serif; margin: 0; }
-        
-        /* Header */
-        header { text-align: center; padding: 50px 20px; border-bottom: 2px solid #222; }
-        h1 { font-family: 'Oswald', sans-serif; color: var(--gold); margin: 0; font-size: 3rem; letter-spacing: 2px; text-transform: uppercase; }
-        p.subtitle { color: #888; font-size: 1.1rem; margin-top: 10px; }
-
-        /* Tabs (Albums) */
-        .tabs-container { 
-            display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; 
-            padding: 30px 20px; position: sticky; top: 0; background: var(--black); z-index: 100;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+        :root {
+            --gold: #D4AF37;
+            --gold-dim: #aa8c2c;
+            --black: #050505;
+            --dark: #111;
+            --gray: #222;
+            --text: #f4f4f4;
         }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--black);
+            color: var(--text);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- Header --- */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+            border-bottom: 1px solid #333;
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            line-height: 1.1;
+        }
+
+        p.subtitle {
+            color: #888;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- Album Tabs --- */
+        .tabs-wrapper {
+            position: sticky;
+            top: 0;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 20px 0;
+            border-bottom: 1px solid #222;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
         .tab-btn {
-            background: transparent; border: 1px solid #444; color: #aaa;
-            padding: 10px 25px; font-family: 'Oswald', sans-serif; font-size: 1rem;
-            cursor: pointer; transition: 0.3s; border-radius: 30px; text-transform: uppercase;
-        }
-        .tab-btn:hover, .tab-btn.active {
-            background: var(--gold); color: #000; border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            background: transparent;
+            border: 1px solid #444;
+            color: #ccc;
+            padding: 10px 24px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Gallery Grid */
+        .tab-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: var(--gold);
+            color: #000;
+            border-color: var(--gold);
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* --- Masonry Grid --- */
         .gallery-grid {
-            column-count: 4; column-gap: 20px; padding: 20px; max-width: 1600px; margin: 0 auto;
+            column-count: 4;
+            column-gap: 20px;
+            padding: 30px;
+            max-width: 1800px;
+            margin: 0 auto;
         }
-        @media (max-width: 1200px) { .gallery-grid { column-count: 3; } }
-        @media (max-width: 800px) { .gallery-grid { column-count: 2; } }
-        @media (max-width: 500px) { .gallery-grid { column-count: 1; } }
 
-        /* Image Card */
+        @media (max-width: 1400px) { .gallery-grid { column-count: 3; } }
+        @media (max-width: 900px) { .gallery-grid { column-count: 2; } }
+        @media (max-width: 600px) { .gallery-grid { column-count: 1; } }
+
+        /* --- Image Card --- */
         .item {
-            background: var(--dark); border-radius: 12px; margin-bottom: 20px;
-            break-inside: avoid; overflow: hidden; position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: transform 0.3s;
-            opacity: 0; animation: fadeIn 0.6s forwards;
+            background: var(--dark);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            break-inside: avoid;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #222;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 0.6s forwards;
         }
-        .item:hover { transform: translateY(-5px); z-index: 2; }
-        
+
+        .item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            border-color: var(--gold-dim);
+            z-index: 10;
+        }
+
         .item img {
-            width: 100%; display: block; transition: 0.3s;
-            min-height: 200px; background: #111; /* Placeholder color */
-        }
-        .item:hover img { filter: brightness(1.1); }
-
-        /* Overlay Info */
-        .info {
-            padding: 15px; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            opacity: 0; transition: 0.3s; transform: translateY(20px);
-        }
-        .item:hover .info { opacity: 1; transform: translateY(0); }
-        
-        .info h3 { color: var(--gold); margin: 0; font-size: 1rem; font-family: 'Oswald', sans-serif; }
-        .info span { font-size: 0.8rem; color: #ddd; }
-
-        /* Error Message */
-        .error-placeholder {
-            padding: 20px; text-align: center; color: red; border: 1px dashed red; margin: 10px; display: none;
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: filter 0.4s ease, transform 0.4s ease;
+            backface-visibility: hidden;
         }
 
-        @keyframes fadeIn { to { opacity: 1; } }
+        .item:hover img {
+            filter: brightness(1.1);
+            transform: scale(1.03);
+        }
+
+        /* --- Info Overlay --- */
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.6) 50%, transparent 100%);
+            padding: 20px 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none; /* Let clicks pass through to image link */
+        }
+
+        .item:hover .overlay {
+            transform: translateY(0);
+        }
+
+        .overlay h3 {
+            color: var(--gold);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            margin: 0 0 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .overlay span {
+            font-size: 0.85rem;
+            color: #ddd;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .meta-tags {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tag {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        /* --- Loading & Error --- */
+        #loader {
+            text-align: center;
+            padding: 100px;
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-family: 'Oswald', sans-serif;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Error Placeholder */
+        .img-error {
+            padding: 40px 20px;
+            text-align: center;
+            background: #151515;
+            color: #555;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+        .img-error svg { margin-bottom: 10px; color: #333; }
+
     </style>
 </head>
 <body>
 
     <header>
         <h1>Mizo Amin Gallery</h1>
-        <p class="subtitle">A Journey of Excellence: Sports, Business & Life</p>
+        <p class="subtitle">A Legacy of Excellence & Leadership</p>
     </header>
 
-    <div class="tabs-container" id="tabs"></div>
+    <!-- Dynamic Album Tabs -->
+    <div class="tabs-wrapper">
+        <div class="tabs-container" id="tabs">
+            <button class="tab-btn active" onclick="filterGallery('All', this)">All Photos</button>
+            <!-- Other tabs generated by JS -->
+        </div>
+    </div>
 
+    <!-- Gallery Grid -->
+    <div id="loader">Loading Archive...</div>
     <div class="gallery-grid" id="gallery"></div>
 
     <script>
+        // -----------------------------------------------------------
+        // ⚙️ CONFIGURATION
+        // -----------------------------------------------------------
+        // Path to JSON data file
         const JSON_URL = 'assets/data/mizo_gallery_data.json';
-        // Base path for images on GitHub
-      const BASE_IMG_PATH = 'https://mizoamin.github.io/mizoamin-media-archive/gallery/';
+        
+        // Base folder for images on GitHub Pages
+        // Important: Ensure this path matches exactly where you uploaded folder 'gallery'
+        const BASE_IMG_PATH = 'assets/images/gallery/';
 
-        let allImages = [];
+        let allImagesData = [];
 
-        // Fetch Data
-        async function init() {
+        // -----------------------------------------------------------
+        // 🚀 INIT
+        // -----------------------------------------------------------
+        async function initGallery() {
             try {
-                const req = await fetch(JSON_URL);
-                if(!req.ok) throw new Error("Failed to load data");
-                allImages = await req.json();
+                const response = await fetch(JSON_URL);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 
+                allImagesData = await response.json();
+                
+                // Hide Loader
+                document.getElementById('loader').style.display = 'none';
+                
+                // 1. Generate Album Tabs
                 generateTabs();
-                renderGallery('All'); // Show all initially
                 
+                // 2. Render All Images Initially
+                renderGallery('All');
+
             } catch (e) {
-                document.getElementById('gallery').innerHTML = `<h2 style="color:red;text-align:center">⚠️ Error loading gallery: ${e.message}</h2>`;
+                console.error("Gallery Error:", e);
+                document.getElementById('loader').innerHTML = 
+                    `<p style="color:red">⚠️ Error loading gallery data.<br>Please ensure 'mizo_gallery_data.json' is uploaded correctly.</p>`;
             }
         }
 
-        // 1. Generate Album Tabs Automatically
+        // -----------------------------------------------------------
+        // 📁 TAB GENERATOR logic
+        // -----------------------------------------------------------
         function generateTabs() {
             const tabsContainer = document.getElementById('tabs');
-            const albums = new Set(['All']); // Default 'All' tab
-            
-            allImages.forEach(img => {
-                // Logic to extract Album name from path (e.g., "twins/img.jpg" -> "Twins")
-                let album = 'General';
+            const albumsSet = new Set();
+
+            allImagesData.forEach(img => {
+                let albumName = 'General';
+
+                // Strategy 1: Use 'filepath' from V17 script (e.g., "Twins/img.jpg")
                 if (img.filepath && img.filepath.includes('/')) {
-                    album = img.filepath.split('/')[0];
-                } else if (img.filename && img.filename.includes('twins')) {
-                    album = 'Twins'; // Fallback logic based on name
-                } else if (img.category) {
-                    album = img.category;
+                    const parts = img.filepath.split('/');
+                    if (parts.length > 1) albumName = parts[0]; 
+                } 
+                // Strategy 2: Fallback to 'album' property if exists
+                else if (img.album) {
+                    albumName = img.album;
                 }
                 
-                // Capitalize first letter
-                album = album.charAt(0).toUpperCase() + album.slice(1);
-                albums.add(album);
+                // Normalize name (Capitalize)
+                albumName = albumName.charAt(0).toUpperCase() + albumName.slice(1).replace(/[-_]/g, ' ');
                 
-                // Save album name back to image object for filtering
-                img._album = album;
+                // Store cleaned album name in object for filtering
+                img._cleanAlbum = albumName;
+                albumsSet.add(albumName);
             });
 
-            // Create HTML Buttons
-            albums.forEach(album => {
-                const btn = document.createElement('button');
-                btn.className = `tab-btn ${album === 'All' ? 'active' : ''}`;
-                btn.innerText = album;
-                btn.onclick = () => filterImages(album, btn);
-                tabsContainer.appendChild(btn);
+            // Create buttons
+            Array.from(albumsSet).sort().forEach(album => {
+                if (album === 'General') return; // Skip General here, we keep it for end or mix
+                createTabBtn(album, tabsContainer);
             });
+            
+            // Add General last if needed, or rely on All
         }
 
-        // 2. Filter & Render Images
-        function filterImages(album, btnElement) {
-            // Update Active Tab
+        function createTabBtn(name, container) {
+            const btn = document.createElement('button');
+            btn.className = 'tab-btn';
+            btn.innerText = name;
+            btn.onclick = () => filterGallery(name, btn);
+            container.appendChild(btn);
+        }
+
+        // -----------------------------------------------------------
+        // 🖼️ RENDER LOGIC
+        // -----------------------------------------------------------
+        function filterGallery(filterName, btnElement) {
+            // Update active tab UI
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             if(btnElement) btnElement.classList.add('active');
 
             const gallery = document.getElementById('gallery');
-            gallery.innerHTML = ''; // Clear current
+            gallery.innerHTML = ''; // Clear grid
 
-            const filtered = album === 'All' ? allImages : allImages.filter(img => img._album === album);
+            // Filter Data
+            const filteredData = filterName === 'All' 
+                ? allImagesData 
+                : allImagesData.filter(img => img._cleanAlbum === filterName);
 
-            if(filtered.length === 0) {
-                gallery.innerHTML = '<h3 style="text-align:center;width:100%">No images found in this album.</h3>';
+            if (filteredData.length === 0) {
+                gallery.innerHTML = `<h3 style="text-align:center;width:100%;color:#666">No images found in ${filterName}</h3>`;
                 return;
             }
 
-            filtered.forEach(img => {
+            // Render Items
+            filteredData.forEach(img => {
+                // Construct Path
+                // Priority: filepath (from script) > filename
+                let imgSrc = img.filepath || img.filename;
+                
+                // Ensure no double slashes
+                if (imgSrc.startsWith('/')) imgSrc = imgSrc.substring(1);
+                
+                // Full URL
+                const fullPath = BASE_IMG_PATH + imgSrc;
+                
+                // Encode spaces to avoid broken links
+                const safePath = fullPath.replace(/ /g, '%20');
+
+                // Create Elements
                 const item = document.createElement('div');
                 item.className = 'item';
                 
-                // --- Smart Path Logic ---
-                // Try filepath first (from V17 script), else fallback to filename
-                let src = '';
-                if (img.filepath) {
-                    src = BASE_IMG_PATH + img.filepath;
-                } else {
-                    // Fallback: Check if we need to add folder manually based on album
-                    if (img._album === 'Twins' && !img.filename.includes('/')) {
-                        src = BASE_IMG_PATH + 'twins/' + img.filename;
-                    } else if (img._album === 'Mizo_amin_kids' && !img.filename.includes('/')) {
-                        src = BASE_IMG_PATH + 'mizo_amin_kids/' + img.filename;
-                    } else {
-                        src = BASE_IMG_PATH + img.filename;
-                    }
-                }
-
-                // URL encoding for safety
-                src = src.replace(/ /g, '%20');
+                // Use Lucide icon for error state
+                lucide.createIcons();
 
                 item.innerHTML = `
-                    <a href="${src}" target="_blank">
-                        <img src="${src}" 
-                             alt="${img.alt_text || 'Mizo Amin Photo'}" 
-                             onerror="this.style.display='none'; this.parentElement.nextElementSibling.style.display='block'">
+                    <a href="${safePath}" target="_blank">
+                        <img src="${safePath}" 
+                             alt="${img.alt_text || 'Mizo Amin'}" 
+                             loading="lazy"
+                             onload="this.style.opacity=1"
+                             onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex'">
                     </a>
-                    <div class="info">
+                    
+                    <div class="overlay">
                         <h3>${img.title || 'Mizo Amin'}</h3>
-                        <span>#${(img.tags || []).slice(0,2).join(' #')}</span>
+                        <span>${img.caption || img.meta_description || 'Professional moment captured.'}</span>
+                        <div class="meta-tags">
+                            ${(img.tags || []).slice(0, 3).map(t => `<span class="tag">${t}</span>`).join('')}
+                        </div>
                     </div>
-                    <div class="error-placeholder" style="display:none">
-                        ⚠️ Image Missing<br><small>${src}</small>
+
+                    <div class="img-error">
+                        <i data-lucide="image-off" width="40" height="40"></i>
+                        <span>Image not found</span>
+                        <small style="font-size:0.6rem;color:#444;margin-top:5px;word-break:break-all">${imgSrc}</small>
                     </div>
                 `;
+                
                 gallery.appendChild(item);
             });
+            
+            // Re-init icons for new elements
+            if(window.lucide) lucide.createIcons();
         }
 
-        init();
-    </script>
+        // Start
+        initGallery();
 
+    </script>
 </body>
 </html>
